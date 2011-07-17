@@ -14,8 +14,8 @@ module DiMLOrb
       # => proximo   = next train arrives in X minutes
       # => siguiente = the following train arrives in Y minutes
       # => duraction = how long should it take to go from one station to the other
-      def initialize(from = STATIONS[:ColoniaJardin], to = STATIONS[:SomosaguasSur])
-          @from, @to = from, to
+      def initialize(from = :ColoniaJardin, to = :SomosaguasSur)
+          @from, @to = STATIONS[from], STATIONS[to]
           @uri = URI.parse("http://www.dimlo.es/Informate/calc.aspx")
           @http = Net::HTTP.new(@uri.host, @uri.port)
           get_validations
