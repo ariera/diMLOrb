@@ -2,7 +2,7 @@
 require 'net/http'
 require 'uri'
 require 'nokogiri'
-require 'stations'
+require File.join(File.dirname(__FILE__), 'stations')
 
 module DiMLOrb
   class DiMLOrb

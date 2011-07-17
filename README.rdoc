@@ -10,8 +10,10 @@ Currently my little website _diMLOya_ supports only 2 stations of all the networ
 
 Note that this gems depends on the diMLO website which oftenly tends to be down or not responsive.
 
+== Installation
+    gem install diMLOrb
 
-= Example of Usage
+== Example of Usage
     require 'diMLOrb'
     #say I want to go from Pozuelo Oeste station to Colonia Jardín station
     d = DiMLOrb::DiMLOrb.new(:PozueloOeste, :ColoniaJardin)
