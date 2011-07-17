@@ -1,13 +1,13 @@
 # encoding: UTF-8
-require 'net/http'
-require 'uri'
+require 'httparty'
 require 'nokogiri'
 require File.join(File.dirname(__FILE__), 'stations')
 
 module DiMLOrb
+  DIMLO_URI = "http://www.dimlo.es/Informate/calc.aspx"
   class DiMLOrb
-      #STATIONS = {:colonia_jardin => "Colonia Jardín|ECJ|ML2", :somosaguas_sur => "Somosaguas Sur|SSU|ML2"}
-      attr_accessor :uri, :http, :html, :viewstate, :eventvalidation, :proximo, :siguiente, :cookie, :data, :duracion, :from, :to
+      
+      attr_accessor :proximo, :siguiente, :duracion, :from, :to
 
       # DiMLOrb.new receives the Metro Ligero Oeste station you are going from and your desired destination
       # it returns you an object with mainly 3 attributes:
@@ -16,8 +16,6 @@ module DiMLOrb
       # => duraction = how long should it take to go from one station to the other
       def initialize(from = :ColoniaJardin, to = :SomosaguasSur)
           @from, @to = STATIONS[from], STATIONS[to]
-          @uri = URI.parse("http://www.dimlo.es/Informate/calc.aspx")
-          @http = Net::HTTP.new(@uri.host, @uri.port)
           get_validations
           get_times
       end
@@ -25,7 +23,7 @@ module DiMLOrb
       # diMLO website uses cookies and token validations (aka protect from forgery) in its forms
       # *get_validations* grabs this values, namely: cookie, viewstate and eventvalidation
       def get_validations
-          resp = @http.get(@uri.path)
+          resp = HTTParty.get(DIMLO_URI)
           raise "HTTP Error: #{resp.code}" if resp.code.to_i != 200
         
           @cookie = resp.response['set-cookie'].split('; ')[0]
@@ -37,12 +35,8 @@ module DiMLOrb
       # *get_times* asks diMLO website for the next metro timetable and parses the html
       # to grab the values of _proximo_, _siguiente_ and _duracion_
       def get_times
-          #@html = Net::HTTP.post_form(@uri, options)
-          req = Net::HTTP::Post.new(@uri.request_uri)
-          req.form_data = options
-          headers.each{ |k,v| req[k] = v }
-          @html = @http.start {|http| http.request(req) }
-          doc  = Nokogiri::HTML(@html.body)
+          resp = HTTParty.post(DIMLO_URI, {:body => form_options, :headers => headers})
+          doc  = Nokogiri::HTML(resp.body)
           @proximo = doc.css('#ProximoTXT').inner_text
           @siguiente = doc.css('#SiguienteTXT').inner_text
           @duracion = doc.css('#DuracionTXT').inner_text
@@ -51,7 +45,7 @@ module DiMLOrb
       protected
       
       # options needed in the form to get the timetables
-      def options
+      def form_options
           { 
               'origenDDL' => @from, 
               'destinoDDL' => @to,
