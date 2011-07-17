@@ -45,6 +45,7 @@ module DiMLOrb
       protected
       
       # options needed in the form to get the timetables
+      # also validation tokens, etc
       def form_options
           { 
               'origenDDL' => @from, 
@@ -56,19 +57,14 @@ module DiMLOrb
           }
       end
       
-      # headers with the validation tokens, etc, needed to ask for the timetables
+      # Mandatory HTTP headers
       def headers
           {   
               'Cookie' => @cookie, 
               'Host' =>	"www.dimlo.es",
-               'User-Agent' =>	"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0) Gecko/20100101 Firefox/4.0",
-          #     'Accept' =>	"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-          #     'Accept-Language' =>	"es-es,es;q=0.8,en-us;q=0.5,en;q=0.3",
-          #     'Accept-Encoding' =>	"gzip, deflate",
-          #     'Accept-Charset' =>	"ISO-8859-1,utf-8;q=0.7,*;q=0.7",
-          #     'Keep-Alive' =>	"115",
-          #     'Connection' =>	'keep-alive',
-               'Referer' =>	'http://www.dimlo.es/Informate/calc.aspx'}
+              'User-Agent' =>	"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0) Gecko/20100101 Firefox/4.0",
+              'Referer' =>	'http://www.dimlo.es/Informate/calc.aspx'
+          }
       end
     
       # debugging function
