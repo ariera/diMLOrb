@@ -16,7 +16,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/ariera/diMLOrb"
   gem.license = "MIT"
   gem.summary = %Q{Ruby API for the diMLO web timetable service}
-  gem.description = %Q{This gem acts as an API to the MLO (Metro Ligero Oeste) public transportation of Madrid, allowing the user get ETA of the next 2 trains}
+  gem.description = %Q{This gem acts as an API to the MLO (Metro Ligero Oeste) public transportation of Madrid, allowing the user get ETAs of the next 2 trains}
   gem.email = "ariera@gmail.com"
   gem.authors = ["ariera"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
