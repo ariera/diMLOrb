@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["ariera"]
   s.date = %q{2011-07-17}
-  s.description = %q{This gem acts as an API to the MLO (Metro Ligero Oeste) public transportation of Madrid, allowing the user get ETA of the next 2 trains}
+  s.description = %q{This gem acts as an API to the MLO (Metro Ligero Oeste) public transportation of Madrid, allowing the user get ETAs of the next 2 trains}
   s.email = %q{ariera@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -19,12 +19,16 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     ".rspec",
+    ".rvmrc",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "diMLOrb.gemspec",
     "lib/diMLOrb.rb",
+    "lib/stations.rb",
     "spec/diMLOrb_spec.rb",
     "spec/spec_helper.rb"
   ]
