@@ -1,12 +1,23 @@
 = diMLOrb
 
-*diMLOrb* is a gem that helps you programatically grab the timetables of the Metro Ligero Oeste (MLO) in the Madrid Community.
+*diMLOrb* is a gem that helps you programmatically grab the timetables of the Metro Ligero Oeste (MLO) in the Madrid Community.
 
 *diMLOrb* is mainly web scraping the MLO official website (diMLO): http://www.dimlo.es/Informate/calc.aspx
 
 I just did this little tool in order to have a single click app in my iphone to check the timetable of the train I have to get everyday. For that purpose I created http://dimloya.heroku.com/ which uses this gem.
 
-Currently both the gem _diMLOrb_ and my little website _diMLOya_ support only 2 stations of all the network. If someone is ever interested in having support for the whole nextwork I would be more than happy to finish the job, until then I'm a lazy guy :P
+Currently my little website _diMLOya_ supports only 2 stations of all the network. If someone is ever interested in having support for the whole nextwork I would be more than happy to finish the job, until then I'll leave it like that (I'm a lazy guy :P)
+
+Note that this gems depends on the diMLO website which oftenly tends to be down or not responsive.
+
+
+= Example of Usage
+    require 'diMLOrb'
+    #say I want to go from Pozuelo Oeste station to Colonia Jardín station
+    d = DiMLOrb::DiMLOrb.new(:PozueloOeste, :ColoniaJardin)
+    d.proximo   # => (in minutes) amount of time first  train will take to get to Pozuelo Oeste
+    d.siguiente # => (in minutes) amount of time second train will take to get to Pozuelo Oeste
+    d.duracion  # => (in minutes) amount of time it will take the train to get from Pozuelo Oeste to Colonia Jardin
 
 == Contributing to diMLOrb
  

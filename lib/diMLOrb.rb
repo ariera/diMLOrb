@@ -2,10 +2,11 @@
 require 'net/http'
 require 'uri'
 require 'nokogiri'
+require 'stations'
 
 module DiMLOrb
   class DiMLOrb
-      STATIONS = {:colonia_jardin => "Colonia Jardín|ECJ|ML2", :somosaguas_sur => "Somosaguas Sur|SSU|ML2"}
+      #STATIONS = {:colonia_jardin => "Colonia Jardín|ECJ|ML2", :somosaguas_sur => "Somosaguas Sur|SSU|ML2"}
       attr_accessor :uri, :http, :html, :viewstate, :eventvalidation, :proximo, :siguiente, :cookie, :data, :duracion, :from, :to
 
       # DiMLOrb.new receives the Metro Ligero Oeste station you are going from and your desired destination
@@ -13,7 +14,7 @@ module DiMLOrb
       # => proximo   = next train arrives in X minutes
       # => siguiente = the following train arrives in Y minutes
       # => duraction = how long should it take to go from one station to the other
-      def initialize(from = STATIONS[:colonia_jardin], to = STATIONS[:somosaguas_sur])
+      def initialize(from = STATIONS[:ColoniaJardin], to = STATIONS[:SomosaguasSur])
           @from, @to = from, to
           @uri = URI.parse("http://www.dimlo.es/Informate/calc.aspx")
           @http = Net::HTTP.new(@uri.host, @uri.port)
